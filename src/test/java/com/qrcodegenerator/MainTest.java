@@ -31,7 +31,7 @@ class MainTest {
     }
 
     @Test
-    void multiValuedQrCode() throws IOException, WriterException, NotFoundException {
+    void writeAndReadMultiValuedQrCode() throws IOException, WriterException, NotFoundException {
         QrCodeWriter qrCodeWriter = new QrCodeWriter();
 
         List<String> list = List.of("Value 1", "Value 2", "Value 3");
@@ -54,7 +54,7 @@ class MainTest {
     }
 
     @Test
-    void returnQrCodeImage() throws IOException, WriterException, NotFoundException {
+    void returnQrCodeByteArrayThenCreateThenRead() throws IOException, WriterException, NotFoundException {
         QrCodeWriter qrCodeWriter = new QrCodeWriter();
 
         String data = "Sample Data";
@@ -80,7 +80,7 @@ class MainTest {
     }
 
     @Test
-    void returnMultiValuedQrCodeImage() throws IOException, WriterException, NotFoundException {
+    void returnMultiValuedQrCodeByteArrayThenCreateThenRead() throws IOException, WriterException, NotFoundException {
         QrCodeWriter qrCodeWriter = new QrCodeWriter();
 
         List<String> list = List.of("Value 1", "Value 2", "Value 3");
@@ -101,7 +101,7 @@ class MainTest {
 
         // Reading QR CODE
         List<String> decodedDataList = qrCodeReader.readMultiValuedQrCode(filePath, fileName, imageFormat);
-        
+
         System.out.println("Decoded data in QR Code ");
         decodedDataList.forEach(System.out::println);
     }
