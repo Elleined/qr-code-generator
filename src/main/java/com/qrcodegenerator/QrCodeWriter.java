@@ -6,7 +6,11 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
@@ -82,5 +86,42 @@ public class QrCodeWriter {
         MatrixToImageWriter.writeToStream(matrix, imageFormat, outputStream);
         System.out.println("Qr Generated Successfully");
         return outputStream.toByteArray();
+    }
+
+    public byte[] generateQrCodeImage(List<String> dataList, int width, int height, String imageFormat) throws WriterException, IOException {
+        if (dataList.isEmpty()) throw new IllegalArgumentException("Please specify the data that will be encoded in your qr code");
+        if (validator.validate(imageFormat)) imageFormat = "jpg";
+
+        String joinedData = String.join(", ", dataList);
+        BitMatrix matrix = new MultiFormatWriter()
+                .encode(joinedData, BarcodeFormat.QR_CODE, width, height);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        MatrixToImageWriter.writeToStream(matrix, imageFormat, outputStream);
+        System.out.println("Qr Generated Successfully");
+        return outputStream.toByteArray();
+    }
+
+    /**
+     * This method will create the QR Code image in your specified path
+     * And can also be used when you are building a website that QR Code will be helpful
+     * @param generatedQrCode is the byte[] array that you generated in generateQrCodeImage method in QrCodeWriter object
+     * @param filePath is the full path directory where the file is located. example: C://
+     * @param fileName is the actual file name of the qr code. example: myqrcode
+     * @param imageFormat is file format of the qr code. example: jpg, png, etc...
+     * This method will transform the specified paths like: C://myqrcode.jpg automatically
+     */
+    public void createQrCodeImage(byte[] generatedQrCode, String filePath, String fileName, String imageFormat) throws IOException {
+        if (generatedQrCode == null) throw new IllegalArgumentException("Generate first the qr code in QrCodeWriter object that returns byte[] then use it in here");
+        if (validator.validate(filePath)) filePath = "./";
+        if (validator.validate(fileName)) fileName = "generated-qr-code";
+        if (validator.validate(imageFormat)) imageFormat = "jpg";
+
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(generatedQrCode);
+        BufferedImage readQrCode = ImageIO.read(inputStream);
+
+        String formattedPath = filePath + "\\" + fileName + '.' + imageFormat;
+        ImageIO.write(readQrCode, imageFormat, new File(formattedPath));
+        System.out.println("Qr Code Image Created Successfully");
     }
 }
