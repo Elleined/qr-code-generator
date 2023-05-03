@@ -15,7 +15,7 @@ public class QrCodeWriter {
     private final PathValidator validator = new PathValidator();
 
     /**
-     * This method will create the single valued QR Code right away in the specified directory path
+     * This method will store single valued QR Code right away in the specified directory path
      * If you want to store an array or multivalued data in your QR Code consider using generateQrCode method with the parameter of List<String>
      * @param data is the text you want to encode/store in your QR Code
      * @param width is the width of the QR Code image
@@ -39,10 +39,10 @@ public class QrCodeWriter {
     }
 
     /**
-     * This method will store an List<String> that will encoded in your QR Code
-     * If you want to read the list back consider using readMultiValuedQrCode method in QrCodeReader
-     * Note: If you use readQrCode it will only returns the literal String of all the values you encoded
-     * @param dataList is the list of values you want to store in your QR Code
+     * This method will store an List<String> that will be encoded in your QR Code
+     * If you want to read the list back consider using readMultiValuedQrCode method in QrCodeReader object
+     * Note: If you use readQrCode it will only return the literal String of all the values you encoded
+     * @param dataList is the List<String> of values you want to store in your QR Code
      * @param width is the width of the QR Code image
      * @param height is the height of the QR Code image
      * @param filePath is the full path directory where the file is located. example: C://

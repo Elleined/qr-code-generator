@@ -23,7 +23,7 @@ public class QrCodeReader {
     /**
      * This method will create the QR Code image in your specified path
      * And can also be used when you are building a website that QR Code will be helpful
-     * @param generatedQrCode is the byte[] array that you generated in generateQrCodeImage method in QrCodeWriter method
+     * @param generatedQrCode is the byte[] array that you generated in generateQrCodeImage method in QrCodeWriter object
      * @param filePath is the full path directory where the file is located. example: C://
      * @param fileName is the actual file name of the qr code. example: myqrcode
      * @param imageFormat is file format of the qr code. example: jpg, png, etc...
@@ -44,7 +44,7 @@ public class QrCodeReader {
     }
 
     /**
-     * Use this if you want to read a single valued data in your generated qr code otherwise use readMultiValuedQrCode
+     * Use this if you want to read a single valued data in your generated qr code otherwise use readMultiValuedQrCode method
      * @param filePath is the full path directory where the file is located. example: C://
      * @param fileName is the actual file name of the qr code. example: myqrcode
      * @param imageFormat is file format of the qr code. example: jpg, png, etc...
@@ -67,7 +67,7 @@ public class QrCodeReader {
     }
 
     /**
-     * Use this if you want to read a multi valued data in your generated qr code that you created otherwise use readQrCode method
+     * Use this if you want to read a multivalued data in your generated qr code that you created otherwise use readQrCode method
      * @param filePath is the full path directory where the file is located. example: C://
      * @param fileName is the actual file name of the qr code. example: myqrcode
      * @param imageFormat is file format of the qr code. example: jpg, png, etc...
